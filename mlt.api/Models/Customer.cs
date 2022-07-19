@@ -1,5 +1,5 @@
 ﻿using System;
 
-namespace mlt.api.Repositories;
+namespace mlt.api.Models;
 
 internal record Customer(Guid Id, string FullName);

@@ -1,52 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using mlt.api.Models;
-using mlt.api.Repositories;
+﻿using Microsoft.AspNetCore.Builder;
+using mlt.api.EndpointDefinitions;
 
-namespace mlt.api.EndpointDefinitions;
+namespace mlt.api.Extensions;
 
 public static class WebApplicationExtension
 {
     public static WebApplication DefineCustomersEndpoints(this WebApplication app)
     {
-        app.MapGet("/customers", GetAllCustomers);
-        app.MapGet("/customers/{id:guid}", GetCustomerById);
-        app.MapPost("/customers/", CreateCustomer);
-        app.MapPut("/customers/{id:guid}", UpdateCustomer);
-        app.MapDelete("/customers/{id:guid}", DeleteCustomer);
+        CustomersEndpoints.GetEndpoints(app);
 
         return app;
     }
 
-    
-
-    internal IList<Customer> GetAllCustomers(ICustomerRepository repo)
-        => repo.GetAll();
-
-    internal IResult GetCustomerById(ICustomerRepository repo, Guid id)
-        => repo.GetById(id) is { } customer ? Results.Ok(customer) : Results.NotFound();
-
-    internal IResult CreateCustomer(ICustomerRepository repo, Customer customer)
+    public static WebApplication DefineSwaggerEndpoints(this WebApplication app)
     {
-        repo.Create(customer);
-        return Results.Created($"/customers/{customer.Id}", customer);
-    }
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mlt api v1"));
 
-    internal IResult UpdateCustomer(ICustomerRepository repo, Guid id, Customer updatedCustomer)
-    {
-        if (repo.GetById(id) is null)
-            return Results.NotFound();
-        
-        repo.Update(updatedCustomer);
-        return Results.Ok(updatedCustomer);
-    }
-
-    internal IResult DeleteCustomer(ICustomerRepository repo, Guid id)
-    {
-        repo.Delete(id);
-        return Results.Ok();
+        return app;
     }
 }

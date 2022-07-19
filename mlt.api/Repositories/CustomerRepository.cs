@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using mlt.api.Repositories;
+using mlt.api.Models;
 
-namespace mlt.api;
+namespace mlt.api.Repositories;
 
-class CustomerRepository
+class CustomerRepository : ICustomerRepository
 {
-    private readonly Dictionary<Guid, Customer?> _customers = new();
+    private readonly Dictionary<Guid, Customer> _customers = new();
 
     public void Create(Customer customer)
     {
@@ -22,7 +22,7 @@ class CustomerRepository
         return _customers[id]!;
     }
 
-    public List<Customer?> GetAll()
+    public List<Customer> GetAll()
     {
         return _customers.Values.ToList();
     }
