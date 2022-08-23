@@ -1,13 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
-using mlt.api.EndpointDefinitions;
-
-namespace mlt.api.Extensions;
+﻿namespace mlt.api.Extensions;
 
 public static class WebApplicationExtension
 {
     public static WebApplication DefineCustomersEndpoints(this WebApplication app)
     {
-        CustomersEndpoints.GetEndpoints(app);
+        // var servides = app.Services.GetServices(Type);
+        // var services = app.Services.GetService<IServiceCollection>();
+        //  
+        //
+        // foreach (var service in services)
+        // {
+        //     //     _logger.LogDebug($"Service: {service.ServiceType.FullName}
+        //     // \nLifetime: {service.Lifetime}
+        //     // \nInstance: {service.ImplementationType?.FullName}");
+        // }
+
+
+        var tst = app.Services.GetService<BaseEndpoints<Customer>>();
+        tst.GetEndpoints(app);
+        // CustomersEndpoints.GetEndpoints(app);
 
         return app;
     }

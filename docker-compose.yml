@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  mlt.api:
+    image: ${DOCKER_REGISTRY-}domain
+    build:
+      context: .
+      dockerfile: mlt.api/Dockerfile
+    ports:
+      - "3000:3000"

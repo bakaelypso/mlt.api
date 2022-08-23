@@ -2,6 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlt.api", "mlt.api\mlt.api.csproj", "{2F749468-5E4C-4914-A102-6B846335FCA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worker.synology.downloader", "worker.synology.downloader\worker.synology.downloader.csproj", "{FFBFB855-3FD2-4F75-A390-938F817D3395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worker.common", "worker.common\worker.common.csproj", "{F57E0E42-01E8-447F-AC6B-1F546A42E02A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "worker", "worker", "{4FAB947E-E0A7-4861-86AB-EBC4C5B5D881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "worker.mongo", "worker.mongo\worker.mongo.csproj", "{E00DC754-9010-40F3-A72E-9C3AED0119DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +20,22 @@ Global
 		{2F749468-5E4C-4914-A102-6B846335FCA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F749468-5E4C-4914-A102-6B846335FCA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F749468-5E4C-4914-A102-6B846335FCA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFBFB855-3FD2-4F75-A390-938F817D3395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBFB855-3FD2-4F75-A390-938F817D3395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBFB855-3FD2-4F75-A390-938F817D3395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBFB855-3FD2-4F75-A390-938F817D3395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57E0E42-01E8-447F-AC6B-1F546A42E02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57E0E42-01E8-447F-AC6B-1F546A42E02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57E0E42-01E8-447F-AC6B-1F546A42E02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57E0E42-01E8-447F-AC6B-1F546A42E02A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00DC754-9010-40F3-A72E-9C3AED0119DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00DC754-9010-40F3-A72E-9C3AED0119DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00DC754-9010-40F3-A72E-9C3AED0119DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00DC754-9010-40F3-A72E-9C3AED0119DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F57E0E42-01E8-447F-AC6B-1F546A42E02A} = {4FAB947E-E0A7-4861-86AB-EBC4C5B5D881}
+		{FFBFB855-3FD2-4F75-A390-938F817D3395} = {4FAB947E-E0A7-4861-86AB-EBC4C5B5D881}
+		{E00DC754-9010-40F3-A72E-9C3AED0119DE} = {4FAB947E-E0A7-4861-86AB-EBC4C5B5D881}
 	EndGlobalSection
 EndGlobal

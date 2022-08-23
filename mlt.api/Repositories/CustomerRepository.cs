@@ -1,43 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using mlt.api.Models;
+﻿using mlt.api.Settings;
 
 namespace mlt.api.Repositories;
 
-class CustomerRepository : ICustomerRepository
+internal class CustomerRepository : IBaseRepository<Customer>
 {
-    private readonly Dictionary<Guid, Customer> _customers = new();
+    private readonly IMongoCollection<Customer> _customersCollection;
 
-    public void Create(Customer customer)
+    public CustomerRepository(IOptions<CustomersDatabaseSettings> customersDatabaseSettings)
     {
-        if (customer is null)
-            return;
+        var mongoClient = new MongoClient(
+            customersDatabaseSettings.Value.ConnectionString);
 
-        _customers[customer.Id] = customer;
+        var mongoDatabase = mongoClient.GetDatabase(
+            customersDatabaseSettings.Value.DatabaseName);
+
+        _customersCollection = mongoDatabase.GetCollection<Customer>(customersDatabaseSettings.Value.CustomersCollectionName);
     }
 
-    public Customer GetById(Guid id)
+    public Task Create(Customer document)
+        => document is null ? Task.CompletedTask : _customersCollection.InsertOneAsync(document);
+
+    public Task<Customer> GetById(Guid id)
+        => _customersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+    public IAsyncEnumerable<Customer> GetAll()
     {
-        return _customers[id]!;
+        Console.WriteLine("Reading");
+        return _customersCollection.Find(_ => true).ToAsyncEnumerable();
     }
 
-    public List<Customer> GetAll()
-    {
-        return _customers.Values.ToList();
-    }
+    public Task Update(Guid id, Customer updatedDocument)
+        => _customersCollection.ReplaceOneAsync(x => x.Id == updatedDocument.Id, updatedDocument);
 
-    public void Update(Customer customer)
-    {
-        var existingCustomer = GetById(customer.Id);
-        if (existingCustomer is null)
-            return;
+    public Task Delete(Guid id) 
+    => _customersCollection.DeleteOneAsync(x => x.Id == id);
 
-        _customers[customer.Id] = customer;
-    }
-
-    public void Delete(Guid id)
-    {
-        _customers.Remove(id);
-    }
 }
