@@ -1,8 +1,6 @@
-﻿using mlt.api.Settings;
+﻿namespace mlt.api.Repositories;
 
-namespace mlt.api.Repositories;
-
-internal class CustomerRepository : IBaseRepository<Customer>
+internal class CustomerRepository
 {
     private readonly IMongoCollection<Customer> _customersCollection;
 
@@ -32,7 +30,6 @@ internal class CustomerRepository : IBaseRepository<Customer>
     public Task Update(Guid id, Customer updatedDocument)
         => _customersCollection.ReplaceOneAsync(x => x.Id == updatedDocument.Id, updatedDocument);
 
-    public Task Delete(Guid id) 
-    => _customersCollection.DeleteOneAsync(x => x.Id == id);
-
+    public Task Delete(Guid id)
+        => _customersCollection.DeleteOneAsync(x => x.Id == id);
 }
