@@ -1,3 +1,6 @@
-﻿namespace mlt.api.Models;
+namespace mlt.api.Models;
 
-internal record Customer(Guid Id, string FullName);
+public class Customer : BaseModel
+{
+    public string FullName { get; set; }
+}
